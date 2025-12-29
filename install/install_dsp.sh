@@ -3,7 +3,7 @@ set -e
 
 # Version to install
 VERSION="v2.0.3"
-ARCH="aarch64" # Pi 3/4/Zero2W (64-bit) running Bookworm 64-bit
+ARCH="armv7" # Pi 3/4/Zero2W (32-bit) running armhf OS
 URL="https://github.com/HEnquist/camilladsp/releases/download/${VERSION}/camilladsp-linux-${ARCH}.tar.gz"
 
 echo "Downloading CamillaDSP ${VERSION}..."
