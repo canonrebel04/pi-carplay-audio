@@ -4,7 +4,7 @@ After=network.target sound.target camilladsp.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/gmediarender -f "RasPi-Car" --uuid 5937494a-9386-444f-9e65-9831a2384932 --output alsa --gstout-audio-sink="alsasink device=default"
+ExecStart=/usr/bin/gmediarender -f "RasPi-Car" --uuid 5937494a-9386-444f-9e65-9831a2384932 --output alsa --gstout-audiosink alsasink --gstout-audiodevice default
 Restart=always
 RestartSec=2
 User=root
