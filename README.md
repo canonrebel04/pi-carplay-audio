@@ -65,6 +65,7 @@ The Hotspot (`CarPlay-Pi`) is **mandatory for AirPlay**.
 3.  **Install Dependencies**:
     ```bash
     sudo apt install git bluez-alsa-utils shairport-sync network-manager python3-dbus
+    sudo ./install/install_dsp.sh  # Installs CamillaDSP
     ```
 4.  **Enable OverlayFS**: `sudo raspi-config nonint enable_overlayfs`
 5.  **Configure Network**:
