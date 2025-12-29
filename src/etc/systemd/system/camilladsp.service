@@ -1,0 +1,19 @@
+[Unit]
+Description=CamillaDSP Audio Processor
+After=sound.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+# Default config is headphones, but logic might vary. 
+# We point to a symlink 'active_config.yml' so we can switch profiles easily without editing the unit.
+ExecStart=/usr/local/bin/camilladsp /etc/camilladsp/active_config.yml
+Restart=always
+RestartSec=1
+User=root
+Group=audio
+LimitRTPRIO=95
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target

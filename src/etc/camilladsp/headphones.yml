@@ -1,0 +1,84 @@
+devices:
+  samplerate: 44100
+  chunksize: 1024
+  capture:
+    type: Alsa
+    channels: 2
+    device: "hw:Loopback,1,0"
+    format: S16LE
+  playback:
+    type: Alsa
+    channels: 2
+    device: "hw:0,0" # The real hardware (PWM/DAC)
+    format: S16LE
+
+mixers:
+  stereo:
+    channels:
+      in: 2
+      out: 2
+    mapping:
+      - dest: 0
+        sources:
+          - channel: 0
+            gain: 0
+            inverted: false
+      - dest: 1
+        sources:
+          - channel: 1
+            gain: 0
+            inverted: false
+
+filters:
+  gain_boost:
+    type: Gain
+    parameters:
+      gain: 12.0 # +12dB Boost for high impedance headphones
+      inverted: false
+
+  bass_boost:
+    type: Biquad
+    parameters:
+      type: LowShelf
+      freq: 100
+      q: 0.7
+      gain: 3.0 # +3dB Bass warmth
+
+  treble_tame:
+    type: Biquad
+    parameters:
+      type: Peaking
+      freq: 8500
+      q: 2.0
+      gain: -3.0 # Tame the "Mount Bayer" treble spike
+
+  limiter:
+    type: DiffEq
+    parameters:
+        type: LS
+        a: [1.0, 0.0]  # This is a placeholder. 
+        # Actually, CamillaDSP v2 has a native 'Limiter' or just use 'HardClip' if cautious.
+        # But for v2, let's stick to simple Gain management. 
+        # A simple HardClip at -0.1dB is safer to prevent digital wrapping.
+
+  safety_clip:
+      type: HardClip
+      parameters: 
+          min: -0.99
+          max: 0.99
+
+pipeline:
+  - type: Filter
+    channel: 0
+    names:
+      - gain_boost
+      - bass_boost
+      - treble_tame
+      - safety_clip
+  - type: Filter
+    channel: 1
+    names:
+      - gain_boost
+      - bass_boost
+      - treble_tame
+      - safety_clip
