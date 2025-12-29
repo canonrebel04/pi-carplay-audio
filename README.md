@@ -27,7 +27,19 @@ Android does not have a native system-wide equivalent to AirPlay.
 -   Install `raspotify` on the Pi (`curl -sL https://dtcooper.github.io/raspotify/install.sh | sh`).
 -   This allows any Android phone to stream high-bitrate Spotify directly to the Pi over WiFi.
 
-### 3. Why do I need the Hotspot?
+### 2. AirPlay (iOS)
+1.  Connect to WiFi **`CarPlay-Pi`**.
+2.  Select AirPlay output **"RasPi-Car"**.
+
+### 3. Android (DLNA/UPnP)
+1.  Connect to WiFi **`CarPlay-Pi`**.
+    -   *Note*: Phone will warn "No Internet". Keep connection.
+    -   **Cellular Data**: The system is designed so your phone continues using 5G/LTE for internet.
+2.  Use a casting app like **BubbleUPnP**.
+3.  Select renderer **"RasPi-Car"**.
+    -   Stream Lossless FLAC/WAV over WiFi.
+
+### 4. Why do I need the Hotspot?
 The Hotspot (`CarPlay-Pi`) is **mandatory for AirPlay**.
 -   AirPlay requires your phone and the Pi to be on the **same WiFi network**.
 -   In a car, there is no router. The Pi *becomes* the router so your iPhone can "see" it.
