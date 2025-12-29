@@ -1,0 +1,10 @@
+[Unit]
+Description=BlueALSA A2DP Playback
+Requires=bluealsa.service
+After=bluealsa.service
+[Service]
+ExecStart=/usr/bin/bluealsa-aplay --profile-a2dp --pcm=plughw:0,0 --pcm-buffer-time=250000 --mixer-name=PCM --volume=none 00:00:00:00:00:00
+Restart=on-failure
+User=root
+[Install]
+WantedBy=multi-user.target
